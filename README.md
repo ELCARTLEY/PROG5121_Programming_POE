@@ -59,7 +59,7 @@ Covers:
 
 ### Login Tests
 File: `src/test/java/com/prog5121_programming_poe/LoginServiceTest.java`
-
+![img.png](docs/images/img.png)
 Covers:
 - Successful registration and successful login.
 - Failed login due to incorrect password.
