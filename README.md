@@ -1,114 +1,71 @@
-# PROG5121 Programming POE
+# Messaging Application
 
-A Java console application for user registration and login with input validation and unit testing.
+This is a simple console-based Java application that demonstrates user registration, login, and message handling functionalities. It's built using Apache Maven and includes features for sending, storing, and managing messages.
 
-## Project Overview
+## Features
 
-This project demonstrates:
-- User registration with validation for username, password, and South African cell number.
-- User authentication using stored registration credentials.
-- Clear confirmation and error messages during registration and login.
-- Unit tests for validation logic and login flow.
+*   **User Authentication**:
+    *   **Registration**: New users can register with a first name, last name, a unique username, a secure password, and a phone number.
+    *   **Login**: Registered users can log in with their credentials. The system allows up to three login attempts before exiting.
 
-## Implemented Features
+*   **Message Handling**:
+    *   **Send Messages**: Once logged in, users can send messages to a recipient. Each message is processed and assigned a unique ID and a SHA-256 hash.
+    *   **Categorize Messages**: Messages can be flagged as `Sent`, `Stored`, or `Disregarded`.
+    *   **Persistent Storage**: Messages flagged as `Stored` are saved to a `stored_messages.json` file, allowing data to persist between application sessions.
 
-### Registration Feature
-- Captures first name and last name.
-- Validates username (`_` required, max length 5).
-- Validates password complexity (minimum 8 chars, uppercase, number, special character).
-- Validates phone number in SA international format (`+27` followed by 9 digits).
-- Uses retry/exit branching when invalid data is entered.
+*   **Stored Messages Management**:
+    *   View all stored messages (sender and recipient).
+    *   Find the longest message among the stored ones.
+    *   Search for a specific message using its unique ID.
+    *   List all messages sent to a particular recipient.
+    *   Delete a message from storage using its hash.
+    *   Generate a full report of all details for every stored message.
 
-### Login Feature
-- Allows login with registered username and password.
-- Uses appropriate decision structures (`if`, `while`, boolean checks) to verify user authentication.
-- Limits login attempts to 3.
-- Displays correct confirmation and error messages.
+## Getting Started
 
-## Decision Structure Used for Authentication
+### Prerequisites
 
-Authentication is handled by boolean decision logic:
-- `loginUser(username, password)` returns `true` only when:
-  - a user has been registered,
-  - username matches the stored username,
-  - password matches the stored password.
-- `returnLoginStatus(isLoggedIn)` returns:
-  - Welcome message when `isLoggedIn == true`.
-  - Error message when `isLoggedIn == false`.
+*   Java Development Kit (JDK) 8 or higher.
+*   Apache Maven.
 
-## Confirmation and Error Messages
+### How to Run
 
-Implemented examples include:
-- `Username successfully captured.`
-- `Password successfully captured.`
-- `Cell phone number successfully added.`
-- `Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.`
-- `Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.`
-- `Cell phone number incorrectly formatted or does not contain international code.`
-- `Username or password incorrect, please try again.`
+1.  **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    cd PROG5121_Programming_POE
+    ```
 
-## Unit Tests
+2.  **Build the project using Maven**:
+    This command will compile the source code and download the required dependencies.
+    ```bash
+    mvn clean install
+    ```
 
-### Validation Tests
-File: `src/test/java/com/prog5121_programming_poe/ValidationServiceTest.java`
+3.  **Run the application**:
+    After a successful build, you can run the application from your IDE by running the `main` method in `org.example.Main`.
 
-Covers:
-- Valid and invalid username checks.
-- Valid and invalid password complexity checks.
-- Valid and invalid phone number checks.
+    Alternatively, you can run the compiled JAR file from the command line:
+    ```bash
+    java -cp target/PROG5121_Programming_POE-1.0-SNAPSHOT.jar org.example.Main
+    ```
 
-### Login Tests
-File: `src/test/java/com/prog5121_programming_poe/LoginServiceTest.java`
-![img.png](docs/images/img.png)
-Covers:
-- Successful registration and successful login.
-- Failed login due to incorrect password.
-- Failed registration due to invalid username.
-- Correct login status messaging.
+## Running the Tests
 
-## Screenshots (Implemented Features and Unit Testing)
+This project includes a suite of unit tests to ensure all functionalities are working as expected.
 
-Add your screenshots to `docs/images/` and keep these names to display them automatically.
-
-### Registration and Validation
-![Registration Flow](docs/images/registration-flow.png)
-![Validation Error Messages](docs/images/validation-errors.png)
-
-### Login Feature
-![Login Success](docs/images/login-success.png)
-![Login Failure](docs/images/login-failure.png)
-
-### Unit Testing
-![Validation Tests Passing](docs/images/validation-tests-passing.png)
-![Login Tests Passing](docs/images/login-tests-passing.png)
-
-## How to Run
-
+To run the tests, execute the following Maven command:
 ```bash
-cd "/c/Users/itume/IdeaProjects/PROG5121_Programming_POE"
-```
-
-Run from IntelliJ by executing `Main` in `src/main/java/org/example/Main.java`.
-
-## How to Run Tests
-
-Run tests from IntelliJ test runner for:
-- `ValidationServiceTest`
-- `LoginServiceTest`
-
-If Maven is available in your terminal:
-
-```bash
-cd "/c/Users/itume/IdeaProjects/PROG5121_Programming_POE"
 mvn test
 ```
 
-## Project Structure
+The tests cover:
+*   User input validation (username, password).
+*   User login logic.
+*   Correct population of message arrays.
+*   All features in the "Stored Messages" menu.
+*   Persistence of stored messages after deletion.
 
-- `src/main/java/model/User.java`
-- `src/main/java/service/ValidationService.java`
-- `src/main/java/service/LoginService.java`
-- `src/main/java/org/example/Main.java`
-- `src/test/java/com/prog5121_programming_poe/ValidationServiceTest.java`
-- `src/test/java/com/prog5121_programming_poe/LoginServiceTest.java`
+## CI/CD
 
+This project is configured with a GitHub Actions workflow (`.github/workflows/TestJava.yml`) that automatically builds the project and runs the unit tests on every push to the repository. This ensures that the codebase remains stable and that new changes do not break existing functionality.
