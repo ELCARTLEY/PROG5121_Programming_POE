@@ -60,27 +60,15 @@ Covers:
 ### Login Tests
 File: `src/test/java/com/prog5121_programming_poe/LoginServiceTest.java`
 ![img.png](docs/images/img.png)
+
+
+
 Covers:
 - Successful registration and successful login.
 - Failed login due to incorrect password.
 - Failed registration due to invalid username.
 - Correct login status messaging.
 
-## Screenshots (Implemented Features and Unit Testing)
-
-Add your screenshots to `docs/images/` and keep these names to display them automatically.
-
-### Registration and Validation
-![Registration Flow](docs/images/registration-flow.png)
-![Validation Error Messages](docs/images/validation-errors.png)
-
-### Login Feature
-![Login Success](docs/images/login-success.png)
-![Login Failure](docs/images/login-failure.png)
-
-### Unit Testing
-![Validation Tests Passing](docs/images/validation-tests-passing.png)
-![Login Tests Passing](docs/images/login-tests-passing.png)
 
 ## How to Run
 
