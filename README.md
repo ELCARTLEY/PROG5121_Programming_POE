@@ -331,6 +331,221 @@ mvn exec:java -Dexec.mainClass="org.example.Main"
 2. Navigate to `src/main/java/org/example/Main.java`
 3. Right-click → Run 'Main.main()'
 
+---
+
+## How to Use the Application
+
+### Step-by-Step Workflow
+
+#### **Step 1: Registration (First-Time Users)**
+
+When you start the application, you'll be prompted to register:
+
+1. **Enter First Name**: Your first name (any text)
+   - Example: `John`
+
+2. **Enter Last Name**: Your last name (any text)
+   - Example: `Doe`
+
+3. **Enter Username**: Must contain underscore (`_`) and be max 5 characters
+   - ✅ Valid: `john_d`, `j_12`, `ab_cd`
+   - ❌ Invalid: `johndoe` (no underscore), `john_doe_1` (too long)
+
+4. **Enter Password**: Must have 8+ characters, uppercase letter, number, and special character
+   - ✅ Valid: `Password123!`, `MyPass@99`, `Secure#2024`
+   - ❌ Invalid: `password` (no uppercase), `Pass123` (no special char), `Pass@1` (too short)
+
+5. **Enter Phone Number**: South African format +27XXXXXXXXX
+   - ✅ Valid: `+27123456789`, `+27987654321`
+   - ❌ Invalid: `0123456789` (no country code), `+27123456` (too short)
+
+**Success Message**: Registration confirmation displayed
+
+#### **Step 2: Login**
+
+After registration, you'll see the login prompt:
+
+1. **Enter Username**: Your registered username
+2. **Enter Password**: Your registered password
+
+**Important**: You have maximum 3 login attempts
+
+- ✅ Correct credentials → Welcome message displayed
+- ❌ Wrong credentials → Error message, try again (up to 3 times)
+- ❌ 3 failed attempts → Program exits
+
+**Success**: Welcome message with your name
+
+```
+Welcome [FirstName], [LastName] it is great to see you again.
+```
+
+#### **Step 3: EasyKanban Main Menu**
+
+After successful login, you'll see:
+
+```
+=== Welcome to EasyKanban ===
+
+Select an option:
+1. Add Tasks
+2. Show Report
+3. Quit
+```
+
+**Choose one:**
+
+##### **Option 1: Add Tasks**
+
+Most important feature for task management:
+
+1. **Start Task Entry**:
+   - No upfront task count declaration required
+   - Simply start entering task information
+
+2. **Enter Task Information** (Repeat for each task):
+   - **Task Name**: e.g., `Login Feature`, `Add Task Feature`
+   - **Task Description**: Must be ≤ 50 characters
+     - ✅ Accepted example: `Create Login to authenticate users` (35 chars)
+     - ❌ Rejected example: `This is a very long description that exceeds fifty characters` (61 chars)
+   - **Developer First Name**: e.g., `Robyn`, `Mike`
+   - **Developer Last Name**: e.g., `Harrison`, `Smith`
+   - **Task Duration**: Hours as integer (e.g., `8`, `10`)
+   - **Task Status**: Select from menu:
+     - `1. To Do`
+     - `2. Done`
+     - `3. Doing`
+
+3. **Task Auto-Generation**:
+   - Task ID automatically created (Format: XX:N:YYY)
+   - Task Number auto-incremented (0, 1, 2, ...)
+   - Example: Task ID `LO:0:SON` for "Login Feature" task 0, developer Robyn Harrison
+
+4. **Task Display**:
+   - JOptionPane window shows your task details
+   - Review and confirm the information
+
+5. **Post-Task Menu** (After each task capture):
+
+```
+========================================
+Task X has been added.
+What would you like to do?
+1. Add another task
+2. View summary and stop adding tasks
+3. Return to main menu
+========================================
+```
+
+   **Choose:**
+   - `1` → Continue adding more tasks (loop back to task entry)
+   - `2` → View task summary and return to main menu
+   - `3` → Return to main menu immediately (saves current tasks)
+
+6. **Task Summary** (When you stop adding):
+```
+========================================
+         TASK SUMMARY
+========================================
+Total tasks added: 2
+
+1. Login Feature [LO:0:SON] - Status: To Do
+2. Add Task Feature [AD:1:ITH] - Status: Doing
+
+========================================
+Total combined hours: 18 hours
+========================================
+```
+
+   Then returns to Main Menu
+
+##### **Option 2: Show Report**
+
+Currently displays: `Coming Soon`
+
+(Feature under development for future releases)
+
+##### **Option 3: Quit**
+
+Displays: `Thank you for using EasyKanban. Goodbye!`
+
+Program terminates cleanly
+
+#### **Step 4: Return to Main Menu**
+
+After adding tasks or viewing reports, you return to the main menu where you can:
+- Add more tasks
+- View reports (when available)
+- Quit the application
+
+---
+
+### Complete Workflow Example
+
+```
+1. Program starts
+   ↓
+2. === REGISTER === (First-time only)
+   • Enter: First name, Last name, Username, Password, Phone
+   ↓
+3. === LOGIN ===
+   • Enter: Username and Password
+   ↓
+4. === Welcome to EasyKanban ===
+   • Choose: 1) Add Tasks, 2) Show Report, 3) Quit
+   ↓
+5. If "Add Tasks":
+   • Enter Task 1 details
+   • [JOptionPane displays task]
+   • Choose: 1) Another task, 2) Summary & Stop, 3) Main Menu
+   • Enter Task 2 details (if chosen option 1)
+   • [JOptionPane displays task]
+   • Choose again...
+   • Eventually: View summary
+   ↓
+6. Back at Main Menu
+   • Can add more tasks, view reports, or quit
+   ↓
+7. Exit (When "Quit" selected)
+   • Program ends
+```
+
+---
+
+### Key Input Validation Rules
+
+| Field | Requirement | Example Valid | Example Invalid |
+|-------|-------------|---|---|
+| Username | Contains `_`, max 5 chars | `ab_c1` | `abcde`, `ab_cde` |
+| Password | 8+ chars, uppercase, digit, special | `Pass@1` | `pass@1`, `Pass1` |
+| Phone | +27XXXXXXXXX | `+27123456789` | `0123456789`, `+261234...` |
+| Task Description | Max 50 characters | `Create feature` (14 chars) | `This is a very long description that exceeds the fifty character limit` |
+| Task Duration | Positive integer | `8`, `10`, `100` | `-5`, `0`, `text` |
+
+---
+
+### Troubleshooting Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| Registration rejected | Check username (needs `_` and ≤5 chars), password (8+ chars, uppercase, number, special char), phone (must be +27XXXXXXXXX) |
+| Login failed 3 times | Program exits; restart and enter correct credentials |
+| Task description rejected | Description exceeds 50 characters; make it shorter |
+| Invalid task duration | Enter a positive number (no decimals), e.g., `8` not `8.5` |
+| Menu appears then disappears | Select valid option (1, 2, or 3) |
+
+---
+
+### Tips for Using the Application
+
+✅ **Take Your Time**: No time limits on entering information  
+✅ **Flexible Task Entry**: Add as many or as few tasks as needed  
+✅ **Check Summary**: Always review task summary for accuracy  
+✅ **Save Progress**: Use "Return to main menu" option to save tasks and explore other features  
+✅ **Reuse Application**: After registration, just login with your credentials  
+
+---
+
 ### Example Usage Flow
 
 ```
