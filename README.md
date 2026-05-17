@@ -1,6 +1,7 @@
 # PROG5121 Programming POE - EasyKanban Task Management System
 
-A comprehensive Java console application demonstrating object-oriented programming, user authentication, task management, and enterprise software development practices.
+A comprehensive Java console application demonstrating object-oriented programming, user authentication, task
+management, and enterprise software development practices.
 
 ## 📋 Table of Contents
 
@@ -18,6 +19,7 @@ A comprehensive Java console application demonstrating object-oriented programmi
 ## Project Overview
 
 This project demonstrates professional software development practices in Java, including:
+
 - User registration with multi-layered validation
 - Secure user authentication with attempt limiting
 - Task management system with auto-generation and validation
@@ -43,6 +45,7 @@ This project demonstrates professional software development practices in Java, i
 ### Implemented Features
 
 #### Registration Module
+
 - Captures user information: first name, last name, username, password, and phone number
 - **Username Validation**: Must contain underscore (`_`), maximum 5 characters
 - **Password Validation**: Minimum 8 characters, at least one uppercase letter, one number, and one special character
@@ -50,6 +53,7 @@ This project demonstrates professional software development practices in Java, i
 - User-friendly retry/exit branching on validation failure
 
 #### Authentication Module
+
 - Login with registered credentials
 - Maximum 3 login attempts with attempt tracking
 - Boolean decision logic for authentication verification
@@ -58,19 +62,21 @@ This project demonstrates professional software development practices in Java, i
 
 ### Validation Rules
 
-| Field | Rule | Error Message |
-|-------|------|---------------|
-| Username | Contains `_` and length ≤ 5 | "Username is not correctly formatted..." |
-| Password | 8+ chars, uppercase, digit, special char | "Password is not correctly formatted..." |
-| Phone | Format: +27XXXXXXXXX (SA) | "Cell phone number incorrectly formatted..." |
+| Field    | Rule                                     | Error Message                                |
+|----------|------------------------------------------|----------------------------------------------|
+| Username | Contains `_` and length ≤ 5              | "Username is not correctly formatted..."     |
+| Password | 8+ chars, uppercase, digit, special char | "Password is not correctly formatted..."     |
+| Phone    | Format: +27XXXXXXXXX (SA)                | "Cell phone number incorrectly formatted..." |
 
 ### Unit Tests - Part 1
 
 **Test Files**:
+
 - `ValidationServiceTest.java` - 6 validation tests
 - `LoginServiceTest.java` - 8 authentication tests
 
 **Coverage**:
+
 - ✅ Valid username acceptance
 - ✅ Invalid username rejection
 - ✅ Password complexity validation (success/failure)
@@ -84,11 +90,13 @@ This project demonstrates professional software development practices in Java, i
 
 ### System Overview
 
-After successful authentication, users access the EasyKanban task management system with a menu-driven interface providing task creation, task tracking, and reporting capabilities.
+After successful authentication, users access the EasyKanban task management system with a menu-driven interface
+providing task creation, task tracking, and reporting capabilities.
 
 ### Core Features
 
 #### Task Management Interface
+
 - **Menu System**: 3 user options (Add Tasks, Show Report, Quit)
 - **Welcome Message**: "Welcome to EasyKanban" displayed after login
 - **Continuous Loop**: Application runs until user selects quit
@@ -97,6 +105,7 @@ After successful authentication, users access the EasyKanban task management sys
 #### Task Entry & Validation
 
 **Task Information Collection**:
+
 - Task Name (string)
 - Task Description (validated: ≤ 50 characters)
 - Developer Details (first name + last name)
@@ -104,8 +113,10 @@ After successful authentication, users access the EasyKanban task management sys
 - Task Status (user-selected from menu: To Do, Done, Doing)
 
 **Auto-Generated Fields**:
+
 - Task Number (auto-incremented from 0)
-- Task ID (format: XX:N:YYY where XX=first 2 letters of task name, N=task number, YYY=last 3 letters of developer surname, ALL CAPS)
+- Task ID (format: XX:N:YYY where XX=first 2 letters of task name, N=task number, YYY=last 3 letters of developer
+  surname, ALL CAPS)
 
 #### Data Validation
 
@@ -121,6 +132,7 @@ Error Message: "Please enter a task description of less than 50 characters"
 #### Task Display
 
 Task details displayed after each task entry via JOptionPane:
+
 ```
 Task Status: To Do
 Developer Details: Robyn Harrison
@@ -134,8 +146,51 @@ Task Duration: 8 hours
 #### Hour Accumulation
 
 Total task hours automatically calculated after all tasks entered:
+
 - Example 1: 8 hours + 10 hours = 18 hours total
 - Example 2: 15 + 20 + 18 + 22 + 14 = 89 hours total
+
+#### Post-Task Menu Enhancement
+
+After each task is successfully captured, users are presented with **3 flexible options**:
+
+```
+========================================
+Task 1 has been added.
+What would you like to do?
+1. Add another task
+2. View summary and stop adding tasks
+3. Return to main menu
+========================================
+```
+
+**Option 1: Add Another Task**
+- Continue entering more tasks without limit
+- Task counter increments automatically
+- Maximum 1000 tasks per session
+- User maintains full control
+
+**Option 2: View Summary and Stop**
+- Display comprehensive task summary:
+  - Total number of tasks added
+  - List of all tasks with ID and status
+  - Total combined hours calculation
+- Return to main menu
+- Can add more tasks later if desired
+
+**Option 3: Return to Main Menu**
+- Save all current tasks
+- Display task summary before exiting task mode
+- Access other EasyKanban features
+- Can continue adding tasks later
+
+**Key Workflow Improvements**:
+- ✅ No upfront task count requirement (flexible entry)
+- ✅ Dynamic task counting with user control
+- ✅ Menu after each capture with 3 clear options
+- ✅ Comprehensive summary display
+- ✅ Easy navigation between task entry and main menu
+- ✅ Progress saved at any point
 
 ### Unit Tests - Part 2
 
@@ -143,21 +198,25 @@ Total task hours automatically calculated after all tasks entered:
 
 **Test Coverage**:
 
-| Test Category | Tests | Purpose |
-|---------------|-------|---------|
-| Description Validation | 3 | Validate ≤50 char limit (success, failure, edge case) |
-| Task ID Generation | 4 | Generate correct format (XX:N:YYY) |
-| Details Formatting | 1 | Verify task display format |
-| Total Hours Calc | 4 | Accumulate hours across tasks |
-| Getter Methods | 1 | Verify all accessors |
-| Edge Cases | 1 | Handle single-letter names |
+| Test Category          | Tests | Purpose                                               |
+|------------------------|-------|-------------------------------------------------------|
+| Description Validation | 3     | Validate ≤50 char limit (success, failure, edge case) |
+| Task ID Generation     | 4     | Generate correct format (XX:N:YYY)                    |
+| Details Formatting     | 1     | Verify task display format                            |
+| Total Hours Calc       | 4     | Accumulate hours across tasks                         |
+| Getter Methods         | 1     | Verify all accessors                                  |
+| Edge Cases             | 1     | Handle single-letter names                            |
 
 **Test Examples**:
+
 ```java
-testCheckTaskDescription_Success()          // 35 chars - Pass
-testCreateTaskID_TestData1()                // LO:0:SON - Correct
-testReturnTotalHours_TwoTasks()             // 18 hours - Correct
-testReturnTotalHours_LoopMultipleTasks()    // 89 hours - Correct
+testCheckTaskDescription_Success();          // 35 chars - Pass
+
+testCreateTaskID_TestData1();            // LO:0:SON - Correct
+
+testReturnTotalHours_TwoTasks();            // 18 hours - Correct
+
+testReturnTotalHours_LoopMultipleTasks();   // 89 hours - Correct
 ```
 
 ---
@@ -167,7 +226,9 @@ testReturnTotalHours_LoopMultipleTasks()    // 89 hours - Correct
 ### SOLID Compliance (5/5 Principles)
 
 #### 1. Single Responsibility Principle (SRP)
+
 Each class has one reason to change:
+
 - **Task.java**: Represents task data and task-specific operations
 - **TaskService.java**: Manages task collection operations
 - **ValidationService.java**: Performs input validation only
@@ -175,22 +236,30 @@ Each class has one reason to change:
 - **Main.java**: Orchestrates user interface and workflow
 
 #### 2. Open/Closed Principle (OCP)
+
 Open for extension, closed for modification:
+
 - New task statuses can be added without modifying existing code
 - New validation rules can be extended through inheritance or composition
 
 #### 3. Liskov Substitution Principle (LSP)
+
 Subtypes are properly substitutable:
+
 - Task objects work interchangeably in arrays and collections
 - Services handle Task instances polymorphically
 
 #### 4. Interface Segregation Principle (ISP)
+
 Classes depend only on necessary methods:
+
 - TaskService depends only on methods it uses from ValidationService
 - No unnecessary interface implementations
 
 #### 5. Dependency Inversion Principle (DIP)
+
 Depend on abstractions, not concrete implementations:
+
 - TaskService depends on ValidationService (abstraction)
 - Constructor injection provides flexibility and testability
 
@@ -239,6 +308,7 @@ Depend on abstractions, not concrete implementations:
 ## How to Run
 
 ### Prerequisites
+
 - Java 8 or higher
 - Maven 3.6 or higher (optional, Maven wrapper available)
 
@@ -246,7 +316,7 @@ Depend on abstractions, not concrete implementations:
 
 ```bash
 # Navigate to project directory
-cd "C:\Users\itume\IdeaProjects\PROG5121_Programming_POE"
+cd "C:\Users\[user]\IdeaProjects\PROG5121_Programming_POE"
 
 # Compile the project
 mvn clean compile
@@ -256,6 +326,7 @@ mvn exec:java -Dexec.mainClass="org.example.Main"
 ```
 
 ### Running from IDE
+
 1. Open project in IntelliJ IDEA
 2. Navigate to `src/main/java/org/example/Main.java`
 3. Right-click → Run 'Main.main()'
@@ -325,6 +396,7 @@ mvn test
 ### Test Summary
 
 **Total Tests**: 20 comprehensive unit tests
+
 - **Part 1 Tests**: 14 tests (Validation + Login)
 - **Part 2 Tests**: 14 tests (Task Management)
 
@@ -393,10 +465,12 @@ PROG5121_Programming_POE/
 **File**: `.github/workflows/maven.yml`
 
 **Triggered On**:
+
 - Push to main or featurename/part2 branches
 - Pull requests to main or featurename/part2 branches
 
 **Pipeline Steps**:
+
 1. Check out repository code
 2. Set up Java 8 runtime environment
 3. Compile project with Maven (clean, compile)
@@ -404,6 +478,7 @@ PROG5121_Programming_POE/
 5. Generate test reports
 
 **Benefits**:
+
 - Automatic code quality checks
 - Early detection of breaking changes
 - Ensures all tests pass before merge
@@ -412,11 +487,13 @@ PROG5121_Programming_POE/
 ### Branching Strategy
 
 **Main Branch**: Production-ready code only
+
 - Stable, fully tested implementations
 - Protected from direct commits
 - Requires passing CI/CD pipeline
 
 **Feature Branch**: `featurename/part2`
+
 - Isolated development for Part 2
 - All Part 2 features developed here
 - Pull request required for merge to main
@@ -426,18 +503,21 @@ PROG5121_Programming_POE/
 ## Learning Objectives Achieved
 
 ### Learning Unit 4: Creating and Working with Loops
+
 - ✅ Task entry loop: `for (int i = 0; i < numberOfTasks; i++)`
 - ✅ Menu selection loop: `while (running)` with switch statement
 - ✅ Total hours calculation loop: Array iteration
 - ✅ Status selection loop: `while (true)` with break condition
 
 ### Learning Unit 5: Handle and Manipulate Strings
+
 - ✅ Task description validation: `length() <= 50`
 - ✅ Task ID generation: `substring()` with bounds checking
 - ✅ String formatting: `String.format()` for display
 - ✅ Input parsing: `Integer.parseInt()`
 
 ### Software Engineering Practices
+
 - ✅ SOLID principles: All 5 principles correctly applied
 - ✅ Unit testing: Comprehensive test coverage (20+ tests)
 - ✅ Code quality: Error handling and validation throughout
@@ -448,16 +528,16 @@ PROG5121_Programming_POE/
 
 ## Code Quality Metrics
 
-| Metric | Value | Status |
-|--------|-------|--------|
-| Total Lines of Code | 500+ | ✅ |
-| Unit Tests | 20 | ✅ All passing |
-| Test Coverage | 100% of core logic | ✅ |
-| SOLID Principles | 5/5 | ✅ 100% applied |
-| Code Duplication | Minimal | ✅ |
-| Documentation | Complete | ✅ |
-| CI/CD Pipeline | GitHub Actions | ✅ Configured |
-| Error Handling | Comprehensive | ✅ |
+| Metric              | Value              | Status         |
+|---------------------|--------------------|----------------|
+| Total Lines of Code | 500+               | ✅              |
+| Unit Tests          | 20                 | ✅ All passing  |
+| Test Coverage       | 100% of core logic | ✅              |
+| SOLID Principles    | 5/5                | ✅ 100% applied |
+| Code Duplication    | Minimal            | ✅              |
+| Documentation       | Complete           | ✅              |
+| CI/CD Pipeline      | GitHub Actions     | ✅ Configured   |
+| Error Handling      | Comprehensive      | ✅              |
 
 ---
 
@@ -474,25 +554,36 @@ For more detailed information, refer to:
 
 Harvard (Author-Date) style references for this project:
 
-1. **Gamma, D., Helm, R., Johnson, R. and Vlissides, J. (1994)** *Design Patterns: Elements of Reusable Object-Oriented Software*. Boston, MA: Addison-Wesley Professional. - Reference for design pattern implementation including SOLID principles.
+1. **Gamma, D., Helm, R., Johnson, R. and Vlissides, J. (1994)** *Design Patterns: Elements of Reusable Object-Oriented
+   Software*. Boston, MA: Addison-Wesley Professional. - Reference for design pattern implementation including SOLID
+   principles.
 
-2. **Martin, R.C. (2008)** *Clean Code: A Handbook of Agile Software Craftsmanship*. New Jersey: Prentice Hall. - Reference for SOLID principles, code quality, and professional programming practices.
+2. **Martin, R.C. (2008)** *Clean Code: A Handbook of Agile Software Craftsmanship*. New Jersey: Prentice Hall. -
+   Reference for SOLID principles, code quality, and professional programming practices.
 
-3. **Martin, R.C. (2018)** *Clean Architecture: A Craftsman's Guide to Software Structure and Design*. Boston, MA: Prentice Hall. - Reference for architecture patterns and Single Responsibility Principle implementation.
+3. **Martin, R.C. (2018)** *Clean Architecture: A Craftsman's Guide to Software Structure and Design*. Boston, MA:
+   Prentice Hall. - Reference for architecture patterns and Single Responsibility Principle implementation.
 
-4. **Beck, K. (2003)** *Test Driven Development: By Example*. Boston, MA: Addison-Wesley Professional. - Reference for unit testing methodology and test-driven development approach.
+4. **Beck, K. (2003)** *Test Driven Development: By Example*. Boston, MA: Addison-Wesley Professional. - Reference for
+   unit testing methodology and test-driven development approach.
 
-5. **Chacon, S. and Straub, B. (2014)** *Pro Git*. 2nd edn. New York: Apress. - Reference for Git version control, branching strategy, and CI/CD pipeline configuration.
+5. **Chacon, S. and Straub, B. (2014)** *Pro Git*. 2nd edn. New York: Apress. - Reference for Git version control,
+   branching strategy, and CI/CD pipeline configuration.
 
-6. **GitHub (2023)** 'GitHub Actions Documentation', available at: https://docs.github.com/en/actions (Accessed: 17 May 2026). - Reference for GitHub Actions workflow automation and CI/CD implementation.
+6. **GitHub (2023)** 'GitHub Actions Documentation', available at: https://docs.github.com/en/actions (Accessed: 17 May
+   2026). - Reference for GitHub Actions workflow automation and CI/CD implementation.
 
-7. **JUnit (2023)** 'JUnit 4 Documentation', available at: https://junit.org/junit4/ (Accessed: 17 May 2026). - Reference for unit testing framework and test assertion methodology.
+7. **JUnit (2023)** 'JUnit 4 Documentation', available at: https://junit.org/junit4/ (Accessed: 17 May 2026). -
+   Reference for unit testing framework and test assertion methodology.
 
-8. **The Java Language Specification (2014)** 'Java 8 Edition'. Available at Oracle documentation. - Reference for Java language features, exception handling, and type system.
+8. **The Java Language Specification (2014)** 'Java 8 Edition'. Available at Oracle documentation. - Reference for Java
+   language features, exception handling, and type system.
 
-9. **Apache Maven (2023)** 'Apache Maven Project Documentation', available at: https://maven.apache.org/ (Accessed: 17 May 2026). - Reference for build automation, dependency management, and Maven configuration.
+9. **Apache Maven (2023)** 'Apache Maven Project Documentation', available at: https://maven.apache.org/ (Accessed: 17
+   May 2026). - Reference for build automation, dependency management, and Maven configuration.
 
-10. **Sommerville, I. (2016)** *Software Engineering*. 10th edn. Harlow: Pearson Education. - Reference for software engineering principles, testing strategies, and quality assurance methodologies.
+10. **Sommerville, I. (2016)** *Software Engineering*. 10th edn. Harlow: Pearson Education. - Reference for software
+    engineering principles, testing strategies, and quality assurance methodologies.
 
 ---
 
@@ -509,13 +600,15 @@ Harvard (Author-Date) style references for this project:
 ## Author Notes
 
 This project demonstrates professional Java development practices including:
+
 - Proper object-oriented design with SOLID principles
 - Comprehensive unit testing for reliability
 - CI/CD automation for quality assurance
 - Clear documentation with academic references
 - Software engineering best practices
 
-For questions or contributions, please refer to the GitHub repository and create a pull request through the appropriate branch management procedures outlined in `GITHUB_SETUP_GUIDE.md`.
+For questions or contributions, please refer to the GitHub repository and create a pull request through the appropriate
+branch management procedures outlined in `GITHUB_SETUP_GUIDE.md`.
 
 ---
 
