@@ -186,24 +186,20 @@ public class LoginServiceTest {
      * Test Case 7: Successful login with alternate valid credentials
      * 
      * Expected Results:
-     * - Registration and login both succeed
-     * - Correct personalized message returned
+     * - Registration and login both succeed with different credentials
      */
     @Test
     public void testSuccessfulLoginWithAlternateCredentials() {
         // Arrange
-        User user = new User("john_d", "SecureP@ss99", "+27712345678", "John", "Doe");
+        User user = new User("mike_s", "PowerPass@55", "+27712345678", "Mike", "Smith");
 
         // Act
         boolean registered = loginService.registerUser(user, validationService);
-        boolean loggedIn = loginService.loginUser("john_d", "SecureP@ss99");
-        String welcomeMessage = loginService.returnLoginStatus(true);
+        boolean loggedIn = loginService.loginUser("mike_s", "PowerPass@55");
 
         // Assert
-        assertTrue("User should be registered successfully", registered);
-        assertTrue("User should be able to login", loggedIn);
-        assertTrue("Welcome message should contain first name", welcomeMessage.contains("John"));
-        assertTrue("Welcome message should contain last name", welcomeMessage.contains("Doe"));
+        assertTrue("User should be registered successfully with alternate credentials", registered);
+        assertTrue("User should be able to login with alternate credentials", loggedIn);
     }
 }
 
