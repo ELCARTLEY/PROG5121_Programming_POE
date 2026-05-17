@@ -175,49 +175,115 @@ public class Main {
 
     /**
      * Handles the task addition workflow
-     * Collects task count and processes task entries
+     * Collects tasks with user choice to add more, stop, or return to menu after each task
      */
     private static void handleAddTasks(Scanner scanner, ValidationService validator) {
-        System.out.print("\nHow many tasks do you wish to enter? ");
-        int numberOfTasks;
+        // Use a large array to allow flexible task entry
+        final int MAX_TASKS = 1000; // Allow up to 1000 tasks
+        TaskService taskService = new TaskService(MAX_TASKS, validator);
+        int taskCount = 0;
+        boolean continueAdding = true;
 
-        try {
-            numberOfTasks = Integer.parseInt(scanner.nextLine());
-            if (numberOfTasks <= 0) {
-                System.out.println("Please enter a positive number.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
-            return;
-        }
-
-        TaskService taskService = new TaskService(numberOfTasks, validator);
-
-        // Collect tasks
-        for (int i = 0; i < numberOfTasks; i++) {
-            System.out.println("\n--- Task " + (i + 1) + " ---");
-            Task task = collectTaskDetails(scanner, i, validator);
+        while (continueAdding && taskCount < MAX_TASKS) {
+            System.out.println("\n--- Task " + (taskCount + 1) + " ---");
+            Task task = collectTaskDetails(scanner, taskCount, validator);
 
             if (task != null) {
                 if (task.checkTaskDescription()) {
                     taskService.addTask(task);
                     System.out.println("Task successfully captured");
+                    taskCount++;
 
                     // Display task details in JOptionPane
                     JOptionPane.showMessageDialog(null, task.printTaskDetails(),
                         "Task Details - " + task.getTaskID(), JOptionPane.INFORMATION_MESSAGE);
+
+                    // Ask user what to do next
+                    continueAdding = handlePostTaskMenu(scanner, taskService, taskCount);
                 } else {
                     System.out.println("Please enter a task description of less than 50 characters");
-                    i--; // Retry this task
+                    // Retry this task without incrementing taskCount
                 }
+            }
+        }
+
+        // Display summary if at least one task was added
+        if (taskCount > 0) {
+            displayTasksSummary(taskService, taskCount);
+        }
+    }
+
+    /**
+     * Displays menu after a task is captured with options to:
+     * 1) Add another task
+     * 2) View summary and stop
+     * 3) Return to main menu
+     *
+     * @param scanner Scanner for user input
+     * @param taskService TaskService containing added tasks
+     * @param taskCount Number of tasks added so far
+     * @return true to continue adding tasks, false to stop adding
+     */
+    private static boolean handlePostTaskMenu(Scanner scanner, TaskService taskService, int taskCount) {
+        while (true) {
+            System.out.println("\n========================================");
+            System.out.println("Task " + taskCount + " has been added.");
+            System.out.println("What would you like to do?");
+            System.out.println("1. Add another task");
+            System.out.println("2. View summary and stop adding tasks");
+            System.out.println("3. Return to main menu");
+            System.out.print("Enter your choice (1-3): ");
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    // Continue adding tasks
+                    return true;
+                case "2":
+                    // Stop adding and show summary
+                    displayTasksSummary(taskService, taskCount);
+                    return false;
+                case "3":
+                    // Return to main menu
+                    if (taskCount > 0) {
+                        System.out.println("\nSaving " + taskCount + " task(s) and returning to main menu...");
+                        displayTasksSummary(taskService, taskCount);
+                    }
+                    return false;
+                default:
+                    System.out.println("Invalid option. Please choose 1, 2, or 3.");
+            }
+        }
+    }
+
+    /**
+     * Displays a summary of all tasks added and total hours
+     *
+     * @param taskService TaskService containing the tasks
+     * @param taskCount Number of tasks added
+     */
+    private static void displayTasksSummary(TaskService taskService, int taskCount) {
+        System.out.println("\n========================================");
+        System.out.println("         TASK SUMMARY");
+        System.out.println("========================================");
+        System.out.println("Total tasks added: " + taskCount);
+
+        // Display each task briefly
+        Task[] tasks = taskService.getTasks();
+        for (int i = 0; i < taskCount && i < tasks.length; i++) {
+            if (tasks[i] != null) {
+                System.out.println("\n" + (i + 1) + ". " + tasks[i].getTaskName()
+                        + " [" + tasks[i].getTaskID() + "]"
+                        + " - Status: " + tasks[i].getTaskStatus());
             }
         }
 
         // Display total hours
         int totalHours = taskService.getTotalHours();
-        System.out.println("\n=== Total Hours ===");
-        System.out.println("Total combined hours across all tasks: " + totalHours + " hours");
+        System.out.println("\n========================================");
+        System.out.println("Total combined hours: " + totalHours + " hours");
+        System.out.println("========================================");
     }
 
     /**
@@ -283,3 +349,4 @@ public class Main {
             }
         }
     }
+}
