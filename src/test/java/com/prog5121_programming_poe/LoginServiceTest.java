@@ -191,11 +191,11 @@ public class LoginServiceTest {
     @Test
     public void testSuccessfulLoginWithAlternateCredentials() {
         // Arrange
-        User user = new User("mike_s", "PowerPass@55", "+27712345678", "Mike", "Smith");
+        User user = new User("ab_21", "PowerPass@55", "+27712345678", "Mike", "Smith");
 
         // Act
         boolean registered = loginService.registerUser(user, validationService);
-        boolean loggedIn = loginService.loginUser("mike_s", "PowerPass@55");
+        boolean loggedIn = loginService.loginUser("ab_21", "PowerPass@55");
 
         // Assert
         assertTrue("User should be registered successfully with alternate credentials", registered);
