@@ -330,22 +330,22 @@ public class Main {
     private static String selectTaskStatus(Scanner scanner) {
         while (true) {
             System.out.println("\nSelect task status:");
-            System.out.println("1. To Do");
-            System.out.println("2. Done");
-            System.out.println("3. Doing");
+            System.out.println("1. To Do 📃");
+            System.out.println("2. Done ✅");
+            System.out.println("3. Doing 🚧");
             System.out.print("Enter your choice (1-3): ");
 
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    return "To Do";
+                    return "To Do 📃";
                 case "2":
-                    return "Done";
+                    return "Done ✅";
                 case "3":
-                    return "Doing";
+                    return "Doing 🚧";
                 default:
-                    System.out.println("Invalid option. Please choose 1, 2, or 3.");
+                    System.out.println("❌ Invalid option. Please choose 1, 2, or 3.");
             }
         }
     }

@@ -12,7 +12,7 @@ A feature branch is a separate branch created from your main branch to develop a
 - Easy to review changes before merging
 - Simple to rollback if something goes wrong
 
-## Step-by-Step: Creating the Rhanbannasks Branch
+## Step-by-Step: Creating the khanbTasks/part_2 Branch
 
 ### Option 1: Using Git Command Line
 
@@ -21,12 +21,12 @@ A feature branch is a separate branch created from your main branch to develop a
 ```bash
 cd "C:\Users\itume\IdeaProjects\PROG5121_Programming_POE"
 
-# Create a new branch named Rhanbannasks
-git checkout -b Rhanbannasks
+# Create a new branch named khanbTasks/part_2
+git checkout -b khanbTasks/part_2
 
 # Or create branch from main (if needed)
 git checkout main
-git checkout -b Rhanbannasks
+git checkout -b khanbTasks/part_2
 ```
 
 #### 2. Verify Branch Creation
@@ -37,7 +37,7 @@ git branch
 
 # Should show:
 #   main
-# * Rhanbannasks  (asterisk indicates current branch)
+# * khanbTasks/part_2  (asterisk indicates current branch)
 ```
 
 #### 3. Make Your Changes
@@ -84,10 +84,10 @@ git commit -m "feat: Implement Part 2 - EasyKanban Task Management System
 
 ```bash
 # First time pushing this branch
-git push -u origin Rhanbannasks
+git push -u origin khanbTasks/part_2
 
 # Subsequent pushes
-git push origin Rhanbannasks
+git push origin khanbTasks/part_2
 ```
 
 ### Option 2: Using GitHub Desktop
@@ -102,7 +102,7 @@ git push origin Rhanbannasks
 
 1. Click "Current Branch" tab at top
 2. Click "New Branch" button
-3. Enter branch name: `Rhanbannasks`
+3. Enter branch name: `khanbTasks/part_2`
 4. Ensure "Based on" is set to `main`
 5. Click "Create Branch"
 
@@ -116,7 +116,7 @@ git push origin Rhanbannasks
 1. All changes should be shown in the "Changes" tab
 2. Review the changes in the diff view
 3. Enter commit message in the text field
-4. Click "Commit to Rhanbannasks"
+4. Click "Commit to khanbTasks/part_2"
 
 #### 5. Push Changes
 
@@ -129,13 +129,13 @@ git push origin Rhanbannasks
 
 1. Click "Git" menu → "Branches..." or press `Ctrl+Shift+Backtick`
 2. Click "New Branch"
-3. Enter branch name: `Rhanbannasks`
+3. Enter branch name: `khanbTasks/part_2`
 4. Click "Create"
 
 #### 2. Verify Current Branch
 
 - Bottom right of IDE shows current branch name
-- Should display "Rhanbannasks"
+- Should display "khanbTasks/part_2"
 
 #### 3. Stage and Commit Changes
 
@@ -143,7 +143,7 @@ git push origin Rhanbannasks
 2. Select files to commit (all should be shown)
 3. Enter commit message
 4. Click "Commit and Push"
-5. Select `origin/Rhanbannasks` as remote branch
+5. Select `origin/khanbTasks/part_2` as remote branch
 
 #### 4. Handle Push
 
@@ -188,7 +188,7 @@ Implements the requirements from Part 2 of PROG5121
 ```
 ┌─────────────────────────────────────────────────┐
 │ 1. Create Feature Branch from Main              │
-│    git checkout -b Rhanbannasks                 │
+│    git checkout -b khanbTasks/part_2                 │
 └─────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────┐
@@ -210,7 +210,7 @@ Implements the requirements from Part 2 of PROG5121
                         ↓
 ┌─────────────────────────────────────────────────┐
 │ 5. Push to GitHub                               │
-│    git push -u origin Rhanbannasks              │
+│    git push -u origin khanbTasks/part_2              │
 └─────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────┐
@@ -236,17 +236,17 @@ git branch
 
 # Switch between branches
 git checkout main          # Switch to main
-git checkout Rhanbannasks  # Switch to feature branch
+git checkout khanbTasks/part_2  # Switch to feature branch
 
 # View branch information
 git branch -v             # Verbose (shows last commit)
 git branch -vv            # Very verbose (shows remote tracking)
 
 # Delete branch (locally)
-git branch -d Rhanbannasks
+git branch -d khanbTasks/part_2
 
 # Delete branch (remote)
-git push origin --delete Rhanbannasks
+git push origin --delete khanbTasks/part_2
 ```
 
 ## Syncing with Main Branch
@@ -258,11 +258,11 @@ If main branch has been updated while working on feature branch:
 git fetch origin
 
 # Rebase feature branch on main (recommended)
-git checkout Rhanbannasks
+git checkout khanbTasks/part_2
 git rebase origin/main
 
 # Or merge main into feature branch
-git checkout Rhanbannasks
+git checkout khanbTasks/part_2
 git merge origin/main
 ```
 
@@ -270,7 +270,7 @@ git merge origin/main
 
 ### 1. Push Feature Branch
 ```bash
-git push origin Rhanbannasks
+git push origin khanbTasks/part_2
 ```
 
 ### 2. Create Pull Request on GitHub
@@ -280,7 +280,7 @@ git push origin Rhanbannasks
 3. Click "New pull request"
 4. Select:
    - Base: `main`
-   - Compare: `Rhanbannasks`
+   - Compare: `khanbTasks/part_2`
 5. Click "Create pull request"
 
 ### 3. Fill in PR Details
@@ -327,7 +327,7 @@ Implements Part 2 of PROG5121 Programming POE - Task Management System
 
 The workflow file `.github/workflows/maven.yml` automatically:
 
-1. **Runs on every push** to main or Rhanbannasks branch
+1. **Runs on every push** to main or khanbTasks/part_2 branch
 2. **Sets up JDK 8**
 3. **Compiles code** with Maven
 4. **Runs all unit tests**
@@ -369,7 +369,7 @@ Check workflow status:
    - Catch mistakes early
 
 7. **Use meaningful branch names**
-   - `Rhanbannasks` (descriptive)
+   - `khanbTasks/part_2` (descriptive)
    - Not `fix1`, `change`, `test`, etc.
 
 ## Troubleshooting
@@ -381,7 +381,7 @@ Check workflow status:
 git branch -a
 
 # Switch to existing branch
-git checkout Rhanbannasks
+git checkout khanbTasks/part_2
 ```
 
 ### Issue: Merge conflicts
@@ -399,10 +399,10 @@ git commit -m "Resolve merge conflicts"
 
 ```bash
 # Pull latest changes first
-git pull origin Rhanbannasks
+git pull origin khanbTasks/part_2
 
 # Then push again
-git push origin Rhanbannasks
+git push origin khanbTasks/part_2
 ```
 
 ### Issue: Undo last commit
@@ -419,7 +419,7 @@ git reset --hard HEAD~1
 
 ```bash
 # Create and switch to feature branch
-git checkout -b Rhanbannasks
+git checkout -b khanbTasks/part_2
 
 # Check current branch
 git branch
@@ -434,7 +434,7 @@ git add .
 git commit -m "Your message"
 
 # Push to remote
-git push -u origin Rhanbannasks
+git push -u origin khanbTasks/part_2
 
 # View changes before committing
 git diff
@@ -444,18 +444,18 @@ git diff --staged
 
 # Switch between branches
 git checkout main
-git checkout Rhanbannasks
+git checkout khanbTasks/part_2
 
 # Delete feature branch
-git branch -d Rhanbannasks
+git branch -d khanbTasks/part_2
 
 # Pull latest changes
-git pull origin Rhanbannasks
+git pull origin khanbTasks/part_2
 ```
 
 ## Next Steps
 
-1. ✅ Feature branch created: `Rhanbannasks`
+1. ✅ Feature branch created: `khanbTasks/part_2`
 2. ✅ Code implemented following SOLID principles
 3. ✅ Unit tests created and passing
 4. ✅ CI/CD pipeline configured
